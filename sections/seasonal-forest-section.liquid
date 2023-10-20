@@ -1,0 +1,308 @@
+<section class="seasonal-forest" id="seasonal-forest">
+    <div class="container">
+        <div class="row">
+          {% comment %} Title header {% endcomment %}
+          <div class="column--header">
+            <div class="section-header">
+                <h1>{{section.settings.header}}</h1>
+                <h2>{{section.settings.header_description}}</h2>
+              </div>
+          </div>
+
+          {% comment %} first block column {% endcomment %}
+          <div class="column--cake">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'column_section' -%} 
+
+                    <div class="section-column">
+                      <div class="col-md-4">
+                        {%- assign cake-image = block.settings.cake-image -%}
+                        <img src="{{ cake-image | image_url: width: cake-image.width }}" alt="">
+                        <h3>{{ block.settings.cake-name }}</h3>
+                        <h4>{{ block.settings.cake-avail }} </h4>
+                        <h5>{{ block.settings.cake-price }}</h5>
+                      </div>
+                    </div>
+
+                {%- endcase -%}
+              {%- endfor -%} 
+          </div>
+
+          {% comment %} second blocks column {% endcomment %}
+          <div class="column--icon">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'column_section_2' -%} 
+
+                    <div class="section-column">
+                      <div class="col-md-4">
+                        {%- assign icon = block.settings.icon -%}
+                        <img src="{{ icon | image_url: width: icon.width }}" alt="">
+                        <h3 class="title">{{ block.settings.title }}</h3>
+                        <p>{{ block.settings.title_description }}</p>
+                      </div>
+                    </div>
+
+                {%- endcase -%}
+              {%- endfor -%} 
+          </div>
+          
+          {% comment %} button {% endcomment %}
+          <div class="column--button">
+            <div class="section-button">
+              <a href="#" class="btn" role="button">SHOP CAKES</a>
+            </div>
+          </div>
+            
+        </div>
+    </div>
+</section>
+
+
+  
+{% schema %}
+    {
+    "name": "tine",
+    "settings": [
+    {
+      "type": "text",
+      "id": "header",
+      "label": "Header"
+    },
+    {
+      "type": "text",
+      "id": "header_description",
+      "label": "Header Description"
+    }
+  ],
+    "blocks": [
+      {
+        "name": "Column Section",
+        "type": "column_section",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "cake-image",
+            "label": "cake-image"
+          },
+          {
+            "type": "text",
+            "id": "cake-name",
+            "label": "cake-name",
+            "default": "name"
+          },
+          {
+            "type": "text",
+            "id": "cake-avail",
+            "label": "cake-avail",
+            "default": "availability"
+          },
+          {
+            "type": "text",
+            "id": "cake-price",
+            "label": "cake-price",
+            "default": "price"
+          }
+        ]
+      },
+      {
+      "name": "Column Section 2",
+      "type": "column_section_2",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "title",
+          "default": "title"
+        },
+        {
+          "type": "textarea",
+          "id": "title_description",
+          "label": "title description",
+          "default": "insert description here"
+        }
+      ]
+    }
+    ],
+    "presets": [
+      {
+        "name": "tine"
+      }
+    ]
+  }  
+{% endschema %}
+  
+{% stylesheet %}
+/* insert this on Shopify Custom Css */
+/* .seasonal-forest {
+    background-image: url(https://cdn.shopify.com/s/files/1/0835/1062/4536/files/BG_Bean_Pink_Masked.png?v=1697539911), 
+                      url(https://cdn.shopify.com/s/files/1/0835/1062/4536/files/BG_Bean_Yellow_Masked.png?v=1697539911);
+    background-repeat: no-repeat;
+    background-size: auto;                                                                                   
+    background-position: right top, left center;
+    text-align: center;
+} */
+
+/* Seasonal Forest Section Style */
+.seasonal-forest .container {
+    max-width: 1220px;
+    margin: auto;
+    margin-bottom: 120px;
+}
+
+.seasonal-forest .column--header h1 {
+    color: #96B1FB;
+    font-size: 50px;
+    font-family: 'Lobster';
+    margin-top: 100px;
+}
+
+.seasonal-forest .column--header h2 {
+    color: #575A61;
+    font-size: 36px;
+    font-family: 'Fredericka the Great';
+}
+
+.seasonal-forest .column--cake {
+    display: flex;
+    gap: 10px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.seasonal-forest .column--cake h3 {
+    color: #575A61;
+    font-size: 21px;
+    /* line-height: 25px; */
+    font-family: 'Montserrat';
+    font-weight: 500;
+    margin: 15px 0px 0px 0px;
+}
+
+.seasonal-forest .column--cake h4 {
+    color: #575A61;
+    font-size: 17px;
+    /* line-height: 20px; */
+    font-family: 'Montserrat';
+    font-weight: 400;
+    margin: 10px 0px 20px 0px;
+}
+
+.seasonal-forest .column--cake h5 {
+    color: #5EBFFE;
+    font-size: 20px;
+    /* line-height: 24px; */
+    font-family: 'Montserrat';
+    font-weight: 500;
+    margin: 0;
+}
+
+.seasonal-forest .column--cake img {
+    width: 100%;
+}
+
+.seasonal-forest .column--icon {
+    display: flex;
+    gap: 48px;
+    text-align: center;
+    margin-top: 120px;
+    margin-bottom: 40px;
+    justify-content: space-around;
+}
+
+.seasonal-forest .column--icon h3 {
+    color: #5EBFFE;
+    font-size: 24px;
+    line-height: 29px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+.seasonal-forest .column--icon p {
+    color: #575A61;
+    font-size: 20px;
+    text-align: left;
+    line-height: 24px;
+    font-family: 'Montserrat';
+    font-weight: 500;
+}
+
+.seasonal-forest .column--icon img {
+    width: 53.6px;
+    height: 70px;
+}
+
+.seasonal-forest .column--button {
+    background-color: #5EBFFE;
+    width: 200px;
+    height: 50px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.seasonal-forest .column--button a {
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 21px;
+    line-height: 25px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+}
+
+/* mobile */
+@media (max-width:600px) {
+.seasonal-forest .container {
+    padding-top: 30px;
+    margin-bottom: 0;
+    padding-bottom: 30px;
+}
+
+.seasonal-forest .column--header h1 {
+    font-size: 40px;
+    margin-top: 0;
+}
+
+.seasonal-forest .column--header h2 {
+    font-size: 20px;
+}
+
+/* cake blocks */
+.seasonal-forest .column--cake {
+    flex-flow: column;
+    width: 80%;
+    margin-top: 60px;
+    margin-bottom: 60px; 
+    margin: 0px auto 50px auto; 
+}
+
+.seasonal-forest .column--cake h3 {
+    margin: 10px;
+}
+
+.seasonal-forest .column--cake h5 {
+    margin: 10px 0px 30px 0px;
+}
+
+/* icon blocks */
+.seasonal-forest .column--icon {
+    flex-flow: column;
+    width: 80%;
+    margin: auto; 
+}
+/* button */
+.seasonal-forest .column--button {
+  margin-top: 60px;
+}
+}
+{% endstylesheet %}
+  
+{% javascript %}
+{% endjavascript %}
